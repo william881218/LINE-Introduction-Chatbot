@@ -35,6 +35,16 @@ def callback():
     return 'OK'
 
 
+# send greeting message for new followers
+@handler.add(FollowEvent)
+def handle_follow(event):
+
+    response = Response.greeting_new_follower()
+
+    # 發送回應
+    line_bot_api.reply_message(event.reply_token, response)
+
+
 # handling messages
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
