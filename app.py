@@ -5,6 +5,8 @@ from linebot import LineBotApi, WebhookHandler
 from linebot.exceptions import InvalidSignatureError
 from linebot.models import *
 
+from response import Response, UnknownMessageError
+
 
 # getting channel access token and secret token from environment variable
 LINE_CHANNEL_ACCESS_TOKEN = os.getenv('LINE_CHANNEL_ACCESS_TOKEN')
@@ -36,8 +38,19 @@ def callback():
 # handling messages
 @handler.add(MessageEvent, message=TextMessage)
 def handle_message(event):
-    message = TextSendMessage(text=event.message.text)
-    line_bot_api.reply_message(event.reply_token, message)
+
+    # get message from user
+    received_message = event.message.text
+
+    # find the corresponding response acording to the received message
+    # if an unknown message is received, tell user that "I can't recognize it."
+    try:
+        responses = Response.response_to_message(received_message)
+    except UnknownMessageError:
+        responses = Response.unknown_message(received_message)
+
+    # reply to user
+    line_bot_api.reply_message(event.reply_token, responses)
 
 
 import os
