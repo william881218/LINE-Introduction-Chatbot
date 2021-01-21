@@ -9,14 +9,11 @@ class Response(object):
     '''
 
     _greeting = TextSendMessage(
-        text='Hi！我是William，很高興認識您！您想要知道關於我的哪些事呢？\n' + 
-             '（可輸入數字或實際標題）\n'
-             '1. 自我介紹\n' +
-             '2. 實習動機\n' + 
-             '3. 專業技能\n' +
-             '4. 工作經驗\n' +
-             '5. 專案展示\n' + 
-             '6. 研究領域'
+        text='Hi！我是William，很高興認識您！您想要知道關於我的哪些事呢？'
+    )
+
+    _finish_responing = TextSendMessage(
+        text='謝謝您的提問！您還想知道哪些事呢？'
     )
 
     _response = OrderedDict([
@@ -94,7 +91,7 @@ class Response(object):
 
         for key_idx, key_word in enumerate(cls._response.keys()):
             if message in key_word or str(key_idx+1) == message:
-                return cls._response[key_word] + [cls._greeting]
+                return cls._response[key_word] + [cls._finish_responing]
 
         raise UnknownMessageError
 
