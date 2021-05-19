@@ -1,5 +1,5 @@
 # LINE-Tech-Fresh-Chatbot
-A chatbot for LINE Tech Fresh 2020 preassessment.
+A chatbot for LINE Tech Fresh 2021 preassessment.
 
 ## QR Code
 ![Charbot QRCode](https://i.imgur.com/rCNXSeO.png)
@@ -32,11 +32,5 @@ A chatbot for LINE Tech Fresh 2020 preassessment.
    ```bash
    python app.py
    ```
-
-> If you don't have a domain name, you can get a temporary one by using `ngrok`. Just run:
->
-> ```bash
-> ngrok http <PORT>
-> ```
 
 5. Happy chatting!

@@ -51,6 +51,7 @@ class ResponseHandler(object):
                     response_messages.append(response_message)
         if len(response_messages) == 0:
             raise UnknownMessageError
+        response_messages.append(Response("thanks", self._thanks_for_asking).message)
         return response_messages
 
 
