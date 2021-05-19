@@ -31,7 +31,7 @@ class ResponseHandler(object):
             responses = response_json.get('responses', None)
 
             if response_type == "built_in":
-                self.__setattr__(response_json['key'], response_json['text'])
+                self.__setattr__('_' + response_json['key'], response_json['text'])
             elif response_type == 'response':
                 self.responses.append(Response(key, text))
             elif response_type == 'multiple_responses':
@@ -51,10 +51,11 @@ class ResponseHandler(object):
                     response_messages.append(response_message)
         if len(response_messages) == 0:
             raise UnknownMessageError
+        return response_messages
 
 
     def unknown_message(self, message):
-        return Response("unknown_message", self.unknown_message.format(message)).message()
+        return Response("unknown_message", self._unknown_message.format(message)).message
 
 
 # A self-defined exception for unrecognizable user message.

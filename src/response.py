@@ -32,7 +32,7 @@ class Response():
 
 
     def should_reply_to(self, message):
-        return any(key in message for key in self._key)
+        return any(key in message or message in key for key in self._key)
 
 
 class MultipleResponses(Response):

@@ -48,7 +48,6 @@ def handle_message(event):
         responses = response_handler.response_to_message(received_message)
     except UnknownMessageError:
         responses = response_handler.unknown_message(received_message)
-
     # reply to user
     line_bot_api.reply_message(event.reply_token, responses)
 
